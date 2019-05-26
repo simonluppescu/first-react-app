@@ -5,10 +5,6 @@ class Counter extends Component {
     count: 0
   };
 
-  constructor() {
-    super();
-  }
-
   handleIncrement = () => {
     this.setState({ count: this.state.count + 1 });
   };
