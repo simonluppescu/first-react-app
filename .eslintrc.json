@@ -20,6 +20,7 @@
   "rules": {
     "arrow-parens": ["warn", "as-needed"],
     "comma-dangle": "off",
+    "indent": "off",
     "max-len": ["warn", 100],
     "no-invalid-this": "off",
     "no-unused-vars": "off",
