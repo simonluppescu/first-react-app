@@ -1,22 +1,36 @@
 import React, { Component } from "react";
 import "../todoList.css";
+import TodoItemTitle from "./todoItemTitle";
+import TodoItemInput from "./todoItemInput";
 
 class TodoItem extends Component {
-  editTitle() {
-    console.log(this);
+  state = {
+    isEdit: false
+  };
+
+  titleDisplayProp() {
+    return this.state.isEdit ? "none" : "inline";
   }
+  inputDisplayProp() {
+    return this.state.isEdit ? "inline" : "none";
+  }
+
+  toggleEdit = () => {
+    this.setState({ isEdit: !this.state.isEdit });
+  };
 
   render() {
     return (
       <div className="todo-item">
         <input type="checkbox" />
-        <span onClick={this.editTitle} className="todo-title">
-          {this.props.todo.title}
-        </span>
-        <input
-          type="text"
-          className="todo-title-input"
+        <TodoItemTitle
+          onClick={this.toggleEdit}
           value={this.props.todo.title}
+          displayProp={this.titleDisplayProp()}
+        />
+        <TodoItemInput
+          value={this.props.todo.title}
+          displayProp={this.inputDisplayProp()}
         />
       </div>
     );
