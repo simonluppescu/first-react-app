@@ -29,8 +29,6 @@ class TodoItem extends Component {
     this.setState({ value: event.target.value });
   }
   handleSave() {
-    console.log(this.state.value);
-
     this.updateServer();
 
     this.toggleEdit();
@@ -47,8 +45,16 @@ class TodoItem extends Component {
         "Content-type": "application/json; charset=UTF-8"
       }
     })
-      .then(response => response.json())
-      .then(json => console.log(json));
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          console.warn("Cannot save this todo. Oh well.");
+        }
+      })
+      .then(json => {
+        if (json) console.log("Saved", json);
+      });
   }
 
   render() {
