@@ -7,6 +7,7 @@ class TodoItemInput extends Component {
         type="text"
         style={{ display: this.props.displayProp }}
         value={this.props.value}
+        onChange={this.props.onChange}
       />
     );
   }

@@ -4,20 +4,32 @@ import TodoItemTitle from "./todoItemTitle";
 import TodoItemInput from "./todoItemInput";
 
 class TodoItem extends Component {
-  state = {
-    isEdit: false
-  };
+  constructor(props) {
+    super(props);
 
-  titleDisplayProp() {
-    return this.state.isEdit ? "none" : "inline";
+    this.state = {
+      isEdit: false,
+      value: this.props.todo.title
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
-  inputDisplayProp() {
-    return this.state.isEdit ? "inline" : "none";
+
+  editingDisplayProp(isEdit) {
+    return isEdit ? "inline" : "none";
   }
 
   toggleEdit = () => {
     this.setState({ isEdit: !this.state.isEdit });
   };
+
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
+  handleSave() {
+    console.log(this.state.value);
+  }
 
   render() {
     return (
@@ -25,13 +37,20 @@ class TodoItem extends Component {
         <input type="checkbox" />
         <TodoItemTitle
           onClick={this.toggleEdit}
-          value={this.props.todo.title}
-          displayProp={this.titleDisplayProp()}
+          value={this.state.value}
+          displayProp={this.editingDisplayProp(!this.state.isEdit)}
         />
-        <TodoItemInput
-          value={this.props.todo.title}
-          displayProp={this.inputDisplayProp()}
-        />
+        <div
+          className="edit-tools"
+          style={{ display: this.editingDisplayProp(this.state.isEdit) }}>
+          <TodoItemInput
+            value={this.state.value}
+            onChange={this.handleChange}
+          />
+          <button className="btn btn-sm btn-success" onClick={this.handleSave}>
+            Save
+          </button>
+        </div>
       </div>
     );
   }

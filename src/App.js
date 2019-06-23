@@ -8,6 +8,7 @@ class App extends Component {
   render() {
     return (
       <main className="container">
+        <h1>Welcome to your Todo list</h1>
         <TodoList />
       </main>
     );
