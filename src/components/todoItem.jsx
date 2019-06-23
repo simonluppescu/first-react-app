@@ -9,7 +9,8 @@ class TodoItem extends Component {
 
     this.state = {
       isEdit: false,
-      value: this.props.todo.title
+      value: this.props.todo.title,
+      id: this.props.todo.id
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -29,6 +30,25 @@ class TodoItem extends Component {
   }
   handleSave() {
     console.log(this.state.value);
+
+    this.updateServer();
+
+    this.toggleEdit();
+  }
+
+  updateServer() {
+    fetch(`https://jsonplaceholder.typicode.com/todos/${this.state.id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        id: this.state.id,
+        title: this.state.value
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+      .then(response => response.json())
+      .then(json => console.log(json));
   }
 
   render() {

@@ -5,6 +5,7 @@ class TodoItemInput extends Component {
     return (
       <input
         type="text"
+        className="todo-input"
         style={{ display: this.props.displayProp }}
         value={this.props.value}
         onChange={this.props.onChange}
