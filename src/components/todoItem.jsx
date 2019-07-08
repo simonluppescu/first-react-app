@@ -22,7 +22,9 @@ class TodoItem extends Component {
   }
 
   toggleEdit = () => {
-    this.setState({ isEdit: !this.state.isEdit });
+    this.setState(state => {
+      return { isEdit: !state.isEdit };
+    });
   };
 
   handleChange(event) {
